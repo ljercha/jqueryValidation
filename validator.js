@@ -2,16 +2,9 @@
 	  
   "use strict";
   
-	$.fn.validation = function(settings, styles) {
-		var standartSettings = {
-			styles:{
-				valid : 'valid',
-				invalid: 'invalid'
-			},
-			patterns:{
-				email: /\S+@\S+\.\S+/
-			}
-		};
+	$.fn.validation = function(settings) {
+
+
 		var $that = $(this);
 
 		$.each(settings, function(input, value) {
@@ -22,11 +15,12 @@
 		});
 
 		var validateField = function($input, pattern) {
+			var emailPattern = /\S+@\S+\.\S+/;
 			switch(pattern.constructor) {
 
 				case String: 
 					if(pattern == "email")
-						highlightField($input, standartSettings.patterns.email.test($input.val()));
+						highlightField($input, emailPattern.test($input.val()));
 					else if(pattern == "password")
 						highlightField($input, isPasswordStrong($input.val()));
 					break;
@@ -55,9 +49,9 @@
 		
 		var highlightField = function($input, correct) {
 			if(correct)
-				$input.removeClass(standartSettings.styles.invalid).addClass(standartSettings.styles.valid);
+				$input.removeClass('invalid').addClass('valid');
 			else
-				$input.removeClass(standartSettings.styles.valid).addClass(standartSettings.styles.invalid);
+				$input.removeClass('valid').addClass('invalid');
 
 			checkIfLockSubmit();
 
@@ -69,7 +63,7 @@
 
 			$.each($that.children("input"), function(key, value){
 				var $value = $(value);
-				if($value.hasClass(styles && styles.invalid || standartSettings.styles.invalid)) {
+				if($value.hasClass('invalid')) {
 					shouldBlockSubmit = true;
 					
 					return;
