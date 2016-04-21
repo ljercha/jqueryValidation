@@ -1,24 +1,50 @@
 <!DOCTYPE html>
 <html>
 <head>
-<meta charset="UTF-8">
-<title>Jquery validator</title>
-<script type="text/javascript" src="./jquery-1.12.3.min.js"></script>
-<script type="text/javascript" src="./myscript.js"></script>
-<style>
-.mycolor {
-	color: blue;
-}
-</style>
+	<title>JQuerry validation ljercha</title>
+	<meta charset="UTF-8">
+	<style>
+		.valid{
+			border-color: green;
+		}
+		.invalid{
+			border-color: red;
+		}
+		input{
+			border-style: solid;
+			border-width: 1px;
+			border-radius: 5px;
+			display: block;
+			border-color: grey;
+		}
+	</style>
+	<script type="text/javascript" src="./jquery-1.12.3.min.js"></script>
+	<script type="text/javascript" src="./validator.js"></script>
+	<script type="text/javascript">
+
+	$(function(){
+		$('#form1').validation({
+			'[name="name"]': /.*/, 
+			'[id="adress"]' : /^[A-Z]/,
+			'#password': "password", 
+			'#email':'email'
+		},
+			{valid: 'valid', invalid: 'invalid'}
+		);
+	})
+	</script>
 </head>
 <body>
-
-<form action="">
-  First name:<br>
-  <input type="text" name="email" value="andy"><br>
-  Last name:<br>
-  <input type="password" name="password" value="badpassword"><br><br>
-  <input type="submit" value="Submit">
-</form>
-
+	<form id="form1" >
+		<label>Name:</label>
+		<input id="name"  name="name" type="text"></input>
+		<label>Password:</label>
+		<input id="password" name="password" type="password"></input>
+		<label>Email:</label>
+		<input id="email" name="email" type="text" value=""></input>
+		<label>Adress:</label>
+		<input id="adress" name="adress" type="text" value=""></input>
+		<input id="submit" type="submit" value="Submit">
+	<form>
+</body>
 </html>
